@@ -117,7 +117,8 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
       }
-      File imageFile = new File(folder,  directory +filename + ".png");
+      File subDirectoryFolder = new File(folder, "TBank");
+      File imageFile = new File(subDirectoryFolder,  filename + ".png");
 
       FileOutputStream out = new FileOutputStream(imageFile);
       bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
