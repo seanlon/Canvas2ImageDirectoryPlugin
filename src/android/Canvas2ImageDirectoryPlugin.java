@@ -103,18 +103,18 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
         folder = Environment
           .getExternalStoragePublicDirectory(directory);
 
-        subDirectoryFolder = new File(folder, "TBank");
+        subDirectoryFolder = new File(folder, "tbank-album");
 
         if(!subDirectoryFolder.exists()) {
           subDirectoryFolder.mkdirs();
         }
       } else {
         folder = Environment.getExternalStorageDirectory();
-        subDirectoryFolder = new File(folder, "TBank"); 
+        subDirectoryFolder = new File(folder, "tbank-album"); 
       }
 
       if (directory == null || directory.isEmpty()) {
-        directory = "/Tbank"  ;
+        directory = "/tbank-album"  ;
       }
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
