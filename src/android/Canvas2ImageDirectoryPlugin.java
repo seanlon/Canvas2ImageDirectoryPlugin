@@ -82,6 +82,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
 
       String deviceVersion = Build.VERSION.RELEASE;
       Log.i("Canvas2ImageDirectoryPlugin", "Android version " + deviceVersion);
+      Log.w("Canvas2ImageDirectoryPlugin", "Android version " + deviceVersion);
       int check = deviceVersion.compareTo("2.3.3");
 
       File folder;
@@ -112,7 +113,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
       }
-      File imageFile = new File(folder,  directory+"/"+filename + ".png");
+      File imageFile = new File(folder,  "asd/"+filename + ".png");
 
       FileOutputStream out = new FileOutputStream(imageFile);
       bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
