@@ -95,7 +95,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
           directory = Environment.DIRECTORY_PICTURES;
         }
         else{
-          directory =Environment.DIRECTORY_PICTURES+ "/" + directory ;
+          directory =Environment.DIRECTORY_PICTURES+  directory ;
 
         }
         folder = Environment
@@ -106,6 +106,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
         }
       } else {
         folder = Environment.getExternalStorageDirectory();
+        folder = folder +"/"+  directory ;
       }
 
       if (filename == null || filename.isEmpty()) {
