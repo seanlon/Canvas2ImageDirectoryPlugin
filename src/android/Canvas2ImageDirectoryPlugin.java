@@ -52,7 +52,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       } else {
 
         // Save the image
-        File imageFile = savePhoto(bmp);
+        File imageFile = savePhoto(bmp, null , null);
         if (imageFile == null)
           callbackContext.error("Error while saving image");
 
