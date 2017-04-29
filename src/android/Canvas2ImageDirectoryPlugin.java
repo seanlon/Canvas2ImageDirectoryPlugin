@@ -71,6 +71,8 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
   private File savePhoto(Bitmap bmp, String directory, String filename) {
     File retVal = null;
 
+ 
+
     try {
       Calendar c = Calendar.getInstance();
       String date = "" + c.get(Calendar.DAY_OF_MONTH)
@@ -96,8 +98,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
           directory = Environment.DIRECTORY_PICTURES;
         }
         else{
-          directory =Environment.DIRECTORY_PICTURES+  directory ;
-
+          directory =Environment.DIRECTORY_PICTURES +  directory ; 
         }
         folder = Environment
           .getExternalStoragePublicDirectory(directory);
@@ -107,13 +108,16 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
         }
       } else {
         folder = Environment.getExternalStorageDirectory();
-        folder = folder  ;
+    
       }
 
+      if (directory == null || directory.isEmpty()) {
+        directory = "/Tbank"  ;
+      }
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
       }
-      File imageFile = new File(folder,  "asd/"+filename + ".png");
+      File imageFile = new File(folder,  directory +filename + ".png");
 
       FileOutputStream out = new FileOutputStream(imageFile);
       bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
