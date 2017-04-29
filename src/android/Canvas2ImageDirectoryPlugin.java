@@ -87,7 +87,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       Log.w("Canvas2ImageDirectoryPlugin", "Android version " + deviceVersion);
       int check = deviceVersion.compareTo("2.3.3");
 
-      File folder;
+      File folder;File subDirectoryFolder ;
       /*
        * File path = Environment.getExternalStoragePublicDirectory(
        * Environment.DIRECTORY_PICTURES ); //this throws error in Android
@@ -103,12 +103,14 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
         folder = Environment
           .getExternalStoragePublicDirectory(directory);
 
-        if(!folder.exists()) {
-          folder.mkdirs();
+        subDirectoryFolder = new File(folder, "TBank");
+
+        if(!subDirectoryFolder.exists()) {
+          subDirectoryFolder.mkdirs();
         }
       } else {
         folder = Environment.getExternalStorageDirectory();
-    
+        subDirectoryFolder = new File(folder, "TBank"); 
       }
 
       if (directory == null || directory.isEmpty()) {
@@ -116,8 +118,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       }
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
-      }
-      File subDirectoryFolder = new File(folder, "TBank");
+      } 
       File imageFile = new File(subDirectoryFolder,  filename + ".png");
 
       FileOutputStream out = new FileOutputStream(imageFile);
