@@ -19,14 +19,30 @@
 //    return self;
 //}
 
+
+
+
+
+
 - (void)saveImageDataToLibrary:(CDVInvokedUrlCommand*)command
 {
-    self.callbackId = command.callbackId;
-	NSData* imageData = [NSData dataFromBase64String:[command.arguments objectAtIndex:0]];
+      self.callbackId = command.callbackId;
+	  NSData* imageData = [NSData dataFromBase64String:[command.arguments objectAtIndex:0]]; 
+	  UIImage* image = [[[UIImage alloc] initWithData:imageData] autorelease];	
+
+      //default album name
+	// UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	
-	UIImage* image = [[[UIImage alloc] initWithData:imageData] autorelease];	
-	UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-	
+
+      //with option for custom album name
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
+        if (error!=nil)
+        {
+            NSLog(@"Error: %@", [error description]);
+        }
+    }];
+
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
