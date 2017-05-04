@@ -21,18 +21,24 @@
 
 
 
-
-
+ 
 
 - (void)saveImageDataToLibrary:(CDVInvokedUrlCommand*)command
 {
+
+    NSLog(@"ENTERED  saveImageDataToLibrary");
+
+    NSString* imageData = [command.arguments objectAtIndex:0]; 
+    NSLog(@"ENTERED  saveImageDataToLibrary imageData" + imageData);
+
       self.callbackId = command.callbackId;
 	  NSData* imageData = [NSData dataFromBase64String:[command.arguments objectAtIndex:0]]; 
 	  UIImage* image = [[[UIImage alloc] initWithData:imageData] autorelease];	
 
       //default album name
 	  UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-	
+	   
+     NSLog(@"COMPLETED  saveImageDataToLibrary");
 
       //with option for custom album name
     // ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -58,7 +64,7 @@
     else  // No errors
     {
         // Show message image successfully saved
-        NSLog(@"IMAGE SAVED!");
+       NSLog(@"IMAGE SAVED!"); 
 		CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:@"Image saved"];
 		[self.webView stringByEvaluatingJavaScriptFromString:[result toSuccessCallbackString: self.callbackId]];
     }
