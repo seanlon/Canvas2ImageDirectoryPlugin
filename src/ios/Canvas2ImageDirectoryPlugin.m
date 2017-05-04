@@ -31,17 +31,17 @@
 	  UIImage* image = [[[UIImage alloc] initWithData:imageData] autorelease];	
 
       //default album name
-	// UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+	  UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	
 
       //with option for custom album name
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
-        if (error!=nil)
-        {
-            NSLog(@"Error: %@", [error description]);
-        }
-    }];
+    // ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    // [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
+    //     if (error!=nil)
+    //     {
+    //         NSLog(@"Error: %@", [error description]);
+    //     }
+    // }];
 
 }
 

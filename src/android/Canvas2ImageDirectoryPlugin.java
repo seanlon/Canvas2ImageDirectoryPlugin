@@ -71,7 +71,13 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
   private File savePhoto(Bitmap bmp, String directory, String filename) {
     File retVal = null;
 
- 
+    String albumName = "";
+    if (directory == null || directory.isEmpty()) { 
+      albumName = "Thanachart-Connect";
+    }
+    else{
+      albumName = directory;
+    }
 
     try {
       Calendar c = Calendar.getInstance();
@@ -103,18 +109,18 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
         folder = Environment
           .getExternalStoragePublicDirectory(directory);
 
-        subDirectoryFolder = new File(folder, "tbank-album");
+        subDirectoryFolder = new File(folder, albumName);
 
         if(!subDirectoryFolder.exists()) {
           subDirectoryFolder.mkdirs();
         }
       } else {
         folder = Environment.getExternalStorageDirectory();
-        subDirectoryFolder = new File(folder, "tbank-album"); 
+        subDirectoryFolder = new File(folder, albumName); 
       }
 
       if (directory == null || directory.isEmpty()) {
-        directory = "/tbank-album"  ;
+        directory = "/" + albumName   ;
       }
       if (filename == null || filename.isEmpty()) {
         filename = "c2i_" + date.toString();
