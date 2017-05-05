@@ -3,7 +3,7 @@
     id="org.devgeeks.Canvas2ImageDirectoryPlugin"
     version="0.6.0">
 
-    <name>Canvas2ImageDirectory</name> 
+    <name>Canvas-2-Image-Directory</name> 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
