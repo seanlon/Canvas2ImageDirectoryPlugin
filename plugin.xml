@@ -3,7 +3,7 @@
     id="org.devgeeks.Canvas2ImageDirectoryPlugin"
     version="0.6.0">
 
-    <name>Canvas2ImageDirectoryPlugin</name> 
+    <name>Canvas2ImageDirectory</name> 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
@@ -17,8 +17,8 @@
 
     <license>MIT</license>
 
-    <js-module src="www/Canvas2ImageDirectoryPlugin.js" name="Canvas2ImageDirectoryPlugin">
-        <clobbers target="window.Canvas2ImageDirectoryPlugin" />
+    <js-module src="www/Canvas2ImageDirectoryPlugin.js" name="canvas2ImageDirectoryPlugin">
+        <clobbers target="window.canvas2ImageDirectoryPlugin" />
     </js-module>
 
     <!-- ios -->
