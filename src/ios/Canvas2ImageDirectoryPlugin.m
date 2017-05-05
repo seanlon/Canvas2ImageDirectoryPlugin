@@ -24,12 +24,7 @@
  
 
 - (void)saveImageDataToLibrary:(CDVInvokedUrlCommand*)command
-{
-
-    NSLog(@"ENTERED  saveImageDataToLibrary");
-
-    NSString* imageData = [command.arguments objectAtIndex:0]; 
-    NSLog(@"ENTERED  saveImageDataToLibrary imageData" + imageData);
+{ 
 
       self.callbackId = command.callbackId;
 	  NSData* imageData = [NSData dataFromBase64String:[command.arguments objectAtIndex:0]]; 
@@ -37,10 +32,12 @@
 
       //default album name
 	  UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-	   
-     NSLog(@"COMPLETED  saveImageDataToLibrary");
+	    
 
       //with option for custom album name
+      
+    // NSString* foldername =command.arguments objectAtIndex:1;
+    // NSString* filename = command.arguments objectAtIndex:2;
     // ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     // [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
     //     if (error!=nil)
