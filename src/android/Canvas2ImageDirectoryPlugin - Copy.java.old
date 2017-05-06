@@ -1,4 +1,4 @@
-﻿package org.devgeeks.Canvas2ImageDirectoryPlugin;
+package org.devgeeks.Canvas2ImageDirectoryPlugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
