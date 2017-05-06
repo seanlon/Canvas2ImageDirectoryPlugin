@@ -68,7 +68,57 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
     }
   }
 
-  private File savePhoto(Bitmap bmp, String directory, String filename) {
+
+  private File savePhoto(Bitmap bmp) {
+    File retVal = null;
+    
+    try {
+      Calendar c = Calendar.getInstance();
+      String date = "" + c.get(Calendar.DAY_OF_MONTH)
+          + c.get(Calendar.MONTH)
+          + c.get(Calendar.YEAR)
+          + c.get(Calendar.HOUR_OF_DAY)
+          + c.get(Calendar.MINUTE)
+          + c.get(Calendar.SECOND);
+
+      String deviceVersion = Build.VERSION.RELEASE;
+      Log.i("Canvas2ImagePlugin", "Android version " + deviceVersion);
+      int check = deviceVersion.compareTo("2.3.3");
+
+      File folder;
+      /*
+       * File path = Environment.getExternalStoragePublicDirectory(
+       * Environment.DIRECTORY_PICTURES ); //this throws error in Android
+       * 2.2
+       */
+      if (check >= 1) {
+        folder = Environment
+          .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        
+        if(!folder.exists()) {
+          folder.mkdirs();
+        }
+      } else {
+        folder = Environment.getExternalStorageDirectory();
+      }
+      
+      File imageFile = new File(folder, "c2i_" + date.toString() + ".png");
+
+      FileOutputStream out = new FileOutputStream(imageFile);
+      bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+      out.flush();
+      out.close();
+
+      retVal = imageFile;
+    } catch (Exception e) {
+      Log.e("Canvas2ImagePlugin", "An exception occured while saving image: "
+          + e.toString());
+    }
+    return retVal;
+  }
+
+
+  private File savePhoto0(Bitmap bmp, String directory, String filename) {
     File retVal = null;
 
     String albumName = directory;
