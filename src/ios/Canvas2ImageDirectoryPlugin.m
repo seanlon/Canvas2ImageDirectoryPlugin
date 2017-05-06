@@ -36,15 +36,15 @@
 
       //with option for custom album name
       
-    // NSString* foldername =command.arguments objectAtIndex:1;
-    // NSString* filename = command.arguments objectAtIndex:2;
-    // ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    // [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
-    //     if (error!=nil)
-    //     {
-    //         NSLog(@"Error: %@", [error description]);
-    //     }
-    // }];
+    NSString* foldername =command.arguments objectAtIndex:1;
+    NSString* filename = command.arguments objectAtIndex:2;
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library saveImage:image toAlbum:@"tbank-album" withCompletionBlock:^(NSError *error) {
+        if (error!=nil)
+        {
+            NSLog(@"Error: %@", [error description]);
+        }
+    }];
 
 }
 
