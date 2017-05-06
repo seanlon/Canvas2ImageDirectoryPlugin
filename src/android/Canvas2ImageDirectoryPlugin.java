@@ -69,9 +69,9 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
   }
 
 
-  private File savePhoto(Bitmap bmp) {
+  private File savePhoto(Bitmap bmp , string directory, string  filename) {
     File retVal = null;
-    
+     
     try {
       Calendar c = Calendar.getInstance();
       String date = "" + c.get(Calendar.DAY_OF_MONTH)
@@ -110,7 +110,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       out.close();
 
       retVal = imageFile;
-    } catch (Exception e) {
+    } catch (Exception e) {  
       Log.e("Canvas2ImagePlugin", "An exception occured while saving image: "
           + e.toString());
     }
