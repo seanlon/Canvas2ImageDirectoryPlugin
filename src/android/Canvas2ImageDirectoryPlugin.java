@@ -38,6 +38,8 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
     if (action.equals(ACTION)) {
 
       String base64 = data.optString(0);
+      String directory = data.optString(1);
+      String filename = data.optString(2);
       if (base64.equals("")) // isEmpty() requires API level 9
         callbackContext.error("Missing base64 string");
       
@@ -50,7 +52,7 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
       } else {
         
         // Save the image
-        File imageFile = savePhoto(bmp);
+        File imageFile = savePhoto(bmp,directory,filename);
         if (imageFile == null)
           callbackContext.error("Error while saving image");
         
@@ -66,7 +68,80 @@ public class Canvas2ImageDirectoryPlugin extends CordovaPlugin {
     }
   }
 
-  private File savePhoto(Bitmap bmp) {
+
+  private File savePhoto(Bitmap bmp, String directory, String filename) {
+    File retVal = null;
+
+    String albumName = directory;
+    if (directory == null || directory.isEmpty()) { 
+      albumName = "Thanachart-Connect";
+    }
+  
+    
+
+    try {
+      Calendar c = Calendar.getInstance();
+      String date = "" + c.get(Calendar.DAY_OF_MONTH)
+          + c.get(Calendar.MONTH)
+          + c.get(Calendar.YEAR)
+          + c.get(Calendar.HOUR_OF_DAY)
+          + c.get(Calendar.MINUTE)
+          + c.get(Calendar.SECOND);
+
+      String deviceVersion = Build.VERSION.RELEASE;
+      Log.i("Canvas2ImageDirectoryPlugin", "Android version " + deviceVersion);
+      Log.w("Canvas2ImageDirectoryPlugin", "Android version " + deviceVersion);
+      int check = deviceVersion.compareTo("2.3.3");
+
+      File folder;File subDirectoryFolder ;
+      /*
+       * File path = Environment.getExternalStoragePublicDirectory(
+       * Environment.DIRECTORY_PICTURES ); //this throws error in Android
+       * 2.2
+       */
+      if (check >= 1) {
+        if (directory == null || directory.isEmpty()) {
+          directory = Environment.DIRECTORY_PICTURES;
+        }
+        else{
+          directory =Environment.DIRECTORY_PICTURES  ; 
+        }
+        folder = Environment
+          .getExternalStoragePublicDirectory(directory);
+
+        subDirectoryFolder = new File(folder, albumName);
+
+        if(!subDirectoryFolder.exists()) {
+          subDirectoryFolder.mkdirs();
+        }
+      } else {
+        folder = Environment.getExternalStorageDirectory();
+        subDirectoryFolder = new File(folder, albumName); 
+      }
+
+      // if (directory == null || directory.isEmpty()) {
+      //   directory = "/" + albumName   ;
+      // }
+      if (filename == null || filename.isEmpty()) {
+        filename = "c2i_" + date.toString();
+      } 
+    //  File imageFile = new File(subDirectoryFolder,  filename + ".png");
+      File imageFile = new File(folder,  filename + ".png");
+
+      FileOutputStream out = new FileOutputStream(imageFile);
+      bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+      out.flush();
+      out.close();
+
+      retVal = imageFile;
+    } catch (Exception e) {
+      Log.e("Canvas2ImageDirectoryPlugin", "An exception occured while saving image: "
+          + e.toString());
+    }
+    return retVal;
+  }
+
+  private File savePhoto0(Bitmap bmp) {
     File retVal = null;
      
     try {
