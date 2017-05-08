@@ -46,7 +46,7 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
           <feature name="Canvas2ImageDirectoryPlugin" >
-            <param name="android-package" value="org.devgeeks.Canvas2ImageDirectoryPlugin.canvas2ImageDirectoryPlugin"/>
+            <param name="android-package" value="org.devgeeks.Canvas2ImageDirectoryPlugin.Canvas2ImageDirectoryPlugin"/>
           </feature>
         </config-file>
 
